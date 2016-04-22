@@ -1,0 +1,61 @@
+#!/bin/sh
+############################################################
+# Get staff and faculty qdb data. 
+# An output file is created called "qdb_data.txt".
+#
+# Last revised: 2009-10-12 gloriar (upgrade FreeTDS from 0.64 to 0.82)
+# Last revised: 2008-07-24 chunt
+############################################################
+
+_show_usage() {
+  echo "\nUSAGE:"
+  echo "$0"
+  exit 1
+}
+
+########################################
+# Main routine starts here
+
+# No input parameters are necessary. 
+# If any are provided show usage and exit.
+if [ -n "$1" ]; then
+  _show_usage
+  exit
+fi
+
+PREFIX=/m1/voyager/ucladb/local/patron
+QUERY=$PREFIX/qdb_data_query.sql
+USERNAME=`cut -f1 /opt/local/bin/qdb_credentials`
+PASSWORD=`cut -f2 /opt/local/bin/qdb_credentials`
+
+# 12 Oct 2009 gloriar: Use /usr/local/freetds/bin instead of $PREFIX/bin
+#PATH=$PREFIX/bin:$PATH			export PATH
+PATH=/usr/local/freetds/bin:$PATH	export PATH
+
+# 12 Oct 2009 gloriar: Use /usr/local/lib instead of $PREFIX/lib
+#   Because of the way /usr/local/freetds/bin/tsql was compiled, its libraries
+#   in /usr/local/lib can be found without an entry in LD_LIBRARY_PATH
+#LD_LIBRARY_PATH=$PREFIX/lib		export LD_LIBRARY_PATH
+
+# Output file for tsql
+QDB_DATA=$PREFIX/qdb_data.txt
+
+# Run the query against the qdb database.
+echo "***** Running query file against the qdb database to create ${QDB_DATA}."
+# Bypass /usr/local/etc/freetds.conf and ~/freetds.conf: put all options on command line
+# TDSVER=8.0 for MS SQL Server 2000
+# -H hostname for qdb database
+# -p port 1433 is default for MS SQL Server 2000
+# -U username
+# -P password
+TDSVER=8.0 tsql -H obiwan.qdb.ucla.edu -p 1433 -U ${USERNAME} -P ${PASSWORD} < ${QUERY} > ${QDB_DATA}
+# Could move options to a section called "qdb" in $PREFIX/bin/freetds.conf
+#tsql -S qdb -I $PREFIX/bin/freetds.conf -U ${USERNAME} -P ${PASSWORD} < ${QUERY} > ${QDB_DATA}
+
+echo "***** Removing the last line of the data file."
+/bin/perl -i.tmp -pe 'eof and undef $_' ${QDB_DATA}
+
+if [ -f ${QDB_DATA}.tmp ]; then
+  echo "***** Removing qdb data file with extra line ${QDB_DATA}.tmp."
+  rm ${QDB_DATA}.tmp
+fi

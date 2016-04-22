@@ -1,0 +1,11 @@
+exec vger_support.lws_patron.insert_new_sif;
+exec vger_support.lws_patron.insert_new_qdb_sif;
+exec vger_support.lws_patron.insert_address_change_sif;
+exec vger_support.lws_patron.insert_fsemail_change_sif;
+exec vger_support.lws_patron.insert_division_change_sif;
+exec vger_support.lws_patron.insert_gender_change_sif;
+exec vger_support.lws_patron.insert_group_change_sif;
+exec vger_support.lws_patron.insert_loi_change_sif;
+exec vger_support.lws_patron.insert_group_exp_change_sif;
+exec vger_support.lws_patron.insert_extend_exp_reg_sif;
+select sif_record from vger_report.patron_sif where processed is null order by sif_id;

@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# Uses custom java program to retrieve student data & generate file for loading
+# Last revised: 20091023 drickard
+
+# Setup
+# modified to use actual latest java install drickard 20100712
+#JAVA=/usr/jdk/latest/bin/java
+JAVA=/usr/local/bin/java
+JAVADIR=/opt/local/java
+PROGRAM=${JAVADIR}/registrar.jar
+PROPERTIES_FILE=${JAVADIR}/srdb.props
+
+# execution
+${JAVA} -jar ${PROGRAM} ${PROPERTIES_FILE}
+#-30-

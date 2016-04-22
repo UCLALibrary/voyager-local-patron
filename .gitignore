@@ -1,0 +1,7 @@
+# Ignore input and output working files, replaced regularly.
+*.bad
+*.err
+*.log
+*.out
+*.txt
+

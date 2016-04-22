@@ -1,0 +1,31 @@
+#!/bin/sh
+############################################################
+# Call scripts to get various qdb data. 
+#
+# Last revised: 2008-04-28 chunt
+############################################################
+
+_show_usage() {
+  echo "\nUSAGE:"
+  echo "$0"
+  exit 1
+}
+
+########################################
+# Main routine starts here
+
+PATRON=/m1/voyager/ucladb/local/patron
+CIRC=/m1/voyager/ucladb/local/circ
+BAR_QDB_DATA_FILE=$CIRC/bar_qdb_data.txt
+
+# No input parameters are necessary. 
+# If any are provided show usage and exit.
+if [ -n "$1" ]; then
+  _show_usage
+  exit
+fi
+
+# Get informaton for patron update.
+$PATRON/bin/get_emp_qdb_data
+# Get BAR information.
+$CIRC/bin/get_bar_qdb_data $BAR_QDB_DATA_FILE
