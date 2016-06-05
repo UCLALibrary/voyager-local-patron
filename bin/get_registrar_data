@@ -7,7 +7,7 @@
 # modified to use actual latest java install drickard 20100712
 #JAVA=/usr/jdk/latest/bin/java
 JAVA=/usr/local/bin/java
-JAVADIR=/opt/local/java
+JAVADIR=/usr/local/java
 PROGRAM=${JAVADIR}/registrar.jar
 PROPERTIES_FILE=${JAVADIR}/srdb.props
 
