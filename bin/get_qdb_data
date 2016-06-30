@@ -25,12 +25,12 @@ fi
 
 PREFIX=/m1/voyager/ucladb/local/patron
 QUERY=$PREFIX/qdb_data_query.sql
-USERNAME=`cut -f1 /usr/local/bin/qdb_credentials`
-PASSWORD=`cut -f2 /usr/local/bin/qdb_credentials`
+USERNAME=`cut -f1 ${VGER_CONFIG}/qdb_credentials`
+PASSWORD=`cut -f2 ${VGER_CONFIG}/qdb_credentials`
 
 # 12 Oct 2009 gloriar: Use /usr/local/freetds/bin instead of $PREFIX/bin
 #PATH=$PREFIX/bin:$PATH			export PATH
-PATH=/usr/local/freetds/bin:$PATH	export PATH
+#PATH=/usr/local/freetds/bin:$PATH	export PATH
 
 # 12 Oct 2009 gloriar: Use /usr/local/lib instead of $PREFIX/lib
 #   Because of the way /usr/local/freetds/bin/tsql was compiled, its libraries
@@ -53,7 +53,7 @@ TDSVER=8.0 tsql -H obiwan.qdb.ucla.edu -p 1433 -U ${USERNAME} -P ${PASSWORD} < $
 #tsql -S qdb -I $PREFIX/bin/freetds.conf -U ${USERNAME} -P ${PASSWORD} < ${QUERY} > ${QDB_DATA}
 
 echo "***** Removing the last line of the data file."
-/bin/perl -i.tmp -pe 'eof and undef $_' ${QDB_DATA}
+/m1/shared/bin/perl -i.tmp -pe 'eof and undef $_' ${QDB_DATA}
 
 if [ -f ${QDB_DATA}.tmp ]; then
   echo "***** Removing qdb data file with extra line ${QDB_DATA}.tmp."
