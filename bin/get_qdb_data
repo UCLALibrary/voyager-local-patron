@@ -16,6 +16,9 @@ _show_usage() {
 ########################################
 # Main routine starts here
 
+# Get voyager environment, for vars and for cron
+. `echo $HOME | sed "s/$LOGNAME/voyager/"`/.profile.local
+
 # No input parameters are necessary. 
 # If any are provided show usage and exit.
 if [ -n "$1" ]; then
