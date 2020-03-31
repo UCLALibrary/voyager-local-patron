@@ -5,11 +5,11 @@
 
 DIR=/m1/voyager/ucladb/local/patron
 
-JAVA=${BIN}/java
+JAVA=/m1/shared/java/jdk1.8.0_131/bin/java
 JAVADIR=${VGER_JAVA}
-CLASSPATH=${JAVADIR}/log4j-1.2.17.jar:${JAVADIR}/commons-logging-1.2.jar:${JAVADIR}/commons-collections-3.1.jar:${JAVADIR}/commons-digester-1.7.jar:${JAVADIR}/xml-apis-1.0.b2.jar:${JAVADIR}/commons-beanutils-1.6.jar:${JAVADIR}/spring-jdbc-4.1.6.RELEASE.jar:${JAVADIR}/spring-beans-4.1.6.RELEASE.jar:${JAVADIR}/spring-core-4.1.6.RELEASE.jar:${JAVADIR}/spring-tx-4.1.6.RELEASE.jar:${JAVADIR}/sqljdbc.jar:${JAVADIR}/ucpath.jar
+CLASSPATH=${JAVADIR}/log4j-api-2.11.2.jar:${JAVADIR}/log4j-core-2.11.2.jar:${JAVADIR}/commons-logging-1.2.jar:${JAVADIR}/commons-collections-3.1.jar:${JAVADIR}/commons-digester-1.7.jar:${JAVADIR}/xml-apis-1.0.b2.jar:${JAVADIR}/commons-beanutils-1.6.jar:${JAVADIR}/spring-jdbc-5.1.6.RELEASE.jar:${JAVADIR}/spring-beans-5.1.6.RELEASE.jar:${JAVADIR}/spring-core-5.1.6.RELEASE.jar:${JAVADIR}/spring-tx-5.1.6.RELEASE.jar:${JAVADIR}/spring-jcl-5.1.6.RELEASE.jar:${JAVADIR}/sqljdbc.jar:${JAVADIR}/ucpath.jar
 PROPERTIES_FILE=${JAVADIR}/ucpath.props
 
 echo "starting UCPath extract at `date`"
 ${JAVA} -classpath ${CLASSPATH} edu.ucla.library.libservices.ucpath.main.Loader ${PROPERTIES_FILE}
-echo "ending UCPath extract at `date`"
+echo -e "\nending UCPath extract at `date`"
