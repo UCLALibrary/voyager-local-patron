@@ -9,7 +9,7 @@
 # Setup
 # modified to use actual latest java install drickard 20100712
 #JAVA=/usr/jdk/latest/bin/java
-JAVA=${BIN}/java
+JAVA=java
 JAVADIR=${VGER_JAVA}
 PROGRAM=${JAVADIR}/registrar.jar
 PROPERTIES_FILE=${JAVADIR}/srdb.props
