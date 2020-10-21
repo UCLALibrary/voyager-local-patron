@@ -1,3 +1,5 @@
+set trimout on;
+
 select
 distinct ltrim(rtrim(pa.address_line1)) as email
 from
